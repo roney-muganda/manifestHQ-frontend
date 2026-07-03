@@ -1,0 +1,137 @@
+/* src/pages/landing/landing.css */
+
+/* ── Orb drifting ─────────────────────────────────────────── */
+@keyframes orb-one {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(60px, -40px) scale(1.08); }
+  66%  { transform: translate(-30px, 50px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orb-two {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  40%  { transform: translate(-70px, 30px) scale(1.05); }
+  70%  { transform: translate(40px, -60px) scale(0.92); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+/* ── Dot grid pan ─────────────────────────────────────────── */
+@keyframes grid-pan {
+  0%   { background-position: 0px 0px; }
+  100% { background-position: 60px 60px; }
+}
+
+/* ── Live pulse ring ──────────────────────────────────────── */
+@keyframes ping-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* ── SMS notification slide ───────────────────────────────── */
+@keyframes sms-in {
+  0%   { opacity: 0; transform: translateX(24px); }
+  15%  { opacity: 1; transform: translateX(0); }
+  75%  { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(8px); }
+}
+
+/* ── Milestone check pop ──────────────────────────────────── */
+@keyframes check-pop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Current stage pulse ──────────────────────────────────── */
+@keyframes stage-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(0,184,169,0); }
+  50%      { box-shadow: 0 0 0 6px rgba(0,184,169,0.2); }
+}
+
+/* ── Scroll reveal ────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Counter digits ───────────────────────────────────────── */
+@keyframes count-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SVG cargo path draw ──────────────────────────────────── */
+@keyframes path-draw {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ── Truck drive ──────────────────────────────────────────── */
+@keyframes truck-move {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* ── Dashboard card entrance ──────────────────────────────── */
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Ambient glow breathe ─────────────────────────────────── */
+@keyframes glow-breathe {
+  0%,100% { opacity: 0.12; }
+  50%      { opacity: 0.22; }
+}
+
+/* ── Utility classes ──────────────────────────────────────── */
+.animate-orb-one   { animation: orb-one   22s ease-in-out infinite; }
+.animate-orb-two   { animation: orb-two   28s ease-in-out infinite; }
+.animate-grid-pan  { animation: grid-pan  8s linear infinite; }
+.animate-ping-ring { animation: ping-ring 1.6s cubic-bezier(0,0,0.2,1) infinite; }
+.animate-sms-in    { animation: sms-in    3.6s ease forwards; }
+.animate-check-pop { animation: check-pop 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.animate-glow      { animation: glow-breathe 4s ease-in-out infinite; }
+.animate-card-in   { animation: card-in   0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+.reveal-delay-6 { transition-delay: 0.48s; }
+
+/* ── Cargo path SVG ───────────────────────────────────────── */
+.cargo-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+.cargo-path.visible {
+  animation: path-draw 2s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* Reduced motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  .animate-orb-one,
+  .animate-orb-two,
+  .animate-grid-pan,
+  .animate-ping-ring,
+  .animate-sms-in,
+  .animate-glow,
+  .animate-card-in,
+  .cargo-path.drawing { animation: none; }
+
+  .reveal { opacity: 1; transform: none; }
+}

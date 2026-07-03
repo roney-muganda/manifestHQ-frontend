@@ -1,0 +1,89 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* ── Brand ───────────────────────────────────────────────── */
+  --midnight:    #0A1628;   /* Primary dark — sidebar, nav */
+  --navy:        #0F2040;   /* Secondary dark — card headers */
+  --ink:         #1A2332;   /* Body text on light backgrounds */
+
+  /* ── Accent ─────────────────────────────────────────────── */
+  --teal:        #00B8A9;   /* Primary action — buttons, links */
+  --teal-dark:   #009688;   /* Hover state */
+  --teal-pale:   #E0F5F3;   /* Teal backgrounds, highlights */
+
+  /* ── Status / Semantic ───────────────────────────────────── */
+  --green:       #10B981;   /* Completed, on track, paid */
+  --green-pale:  #D1FAE5;
+  --amber:       #F59E0B;   /* Warning, demurrage approaching */
+  --amber-pale:  #FEF3C7;
+  --red:         #EF4444;   /* Critical, in demurrage, failed */
+  --red-pale:    #FEE2E2;
+  --blue:        #3B82F6;   /* Informational, in progress */
+  --blue-pale:   #DBEAFE;
+
+  /* ── Neutrals ────────────────────────────────────────────── */
+  --surface:     #F8F9FB;   /* Page background */
+  --card:        #FFFFFF;   /* Card background */
+  --border:      #E2E8F0;   /* Default border */
+  --border-strong: #CBD5E1; /* Stronger border */
+  --muted:       #94A3B8;   /* Placeholder, secondary labels */
+  --slate:       #64748B;   /* Secondary text */
+  --body:        #334155;   /* Primary body text */
+
+  /* ── Data Display ────────────────────────────────────────── */
+  --data-bg:     #F1F5F9;   /* Background behind mono data */
+
+  /* ── Typography Roles ────────────────────────────────────── */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-data:    'JetBrains Mono', monospace;
+
+  /* ── Spacing (4px base unit) ────────────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Radii ───────────────────────────────────────────────── */
+  --r-sm:  6px;
+  --r-md:  10px;
+  --r-lg:  16px;
+  --r-xl:  24px;
+
+  /* ── Shadows (Intentionally Minimal) ─────────────────────── */
+  --shadow-sm: 0 1px 3px rgba(10, 22, 40, 0.08);
+  --shadow-md: 0 4px 12px rgba(10, 22, 40, 0.10);
+  --shadow-lg: 0 8px 24px rgba(10, 22, 40, 0.12);
+}
+
+/* Base resets to enforce the Bloomberg-style density */
+body {
+  background-color: var(--surface);
+  color: var(--body);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom utility for dense data containers */
+.data-table-cell {
+  font-family: var(--font-data);
+  font-size: 0.875rem;
+  letter-spacing: -0.025em;
+}
