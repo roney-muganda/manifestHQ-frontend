@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '@/services/api';
 import { getReadableError } from '@/lib/errors';
+import Spline from '@splinetool/react-spline';
 import {
   ArrowRight,
   CheckCircle2,
@@ -172,14 +173,16 @@ function NavBar({ menuOpen, setMenuOpen }: {
 
 function Hero() {
   return (
-    <section className="relative bg-midnight pt-32 pb-20 px-5 overflow-hidden">
-      {/* Background drifting orbs */}
-      <div className="absolute top-10 left-[10%] w-96 h-96 bg-teal/20 rounded-full blur-[120px] pointer-events-none animate-orb-one" />
-      <div className="absolute bottom-10 right-[10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[150px] pointer-events-none animate-orb-two" />
+    <section className="relative bg-midnight pt-32 pb-20 px-5 overflow-hidden min-h-[90vh] flex items-center">
+      
+      {/* ── 3D Spline Background ── */}
+      <div className="absolute inset-0 w-full h-full z-0 opacity-80">
+        <Spline scene="https://prod.spline.design/vTESltPVKVKkgfWR/scene.splinecode" />
+      </div>
 
-      {/* Background grid pan */}
+      {/* Background grid pan (kept for texture) */}
       <div
-        className="absolute inset-0 opacity-[0.04] animate-grid-pan"
+        className="absolute inset-0 opacity-[0.04] animate-grid-pan pointer-events-none z-0"
         style={{
           backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px),
                             linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
@@ -187,18 +190,13 @@ function Hero() {
         }}
       />
 
-      {/* Glow */}
-      <div className="
-        absolute top-0 left-1/2 -translate-x-1/2
-        w-[600px] h-[300px]
-        bg-teal/10 rounded-full blur-[120px]
-        pointer-events-none animate-glow
-      " />
-
-      <div className="max-w-4xl mx-auto text-center relative reveal">
+      {/* Main Content Overlay */}
+      {/* pointer-events-none allows clicking/dragging the 3D model through the empty spaces */}
+      <div className="max-w-4xl mx-auto text-center relative z-10 reveal pointer-events-none mt-10">
+        
         {/* Pill */}
         <div className="
-          inline-flex items-center gap-2 bg-white/5 border border-white/10
+          inline-flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md
           rounded-full px-4 py-2 text-sm font-body text-[#94A3B8] mb-8
         ">
           <Zap className="w-3.5 h-3.5 text-teal" />
@@ -207,7 +205,7 @@ function Hero() {
 
         <h1 className="
           font-display font-bold text-white leading-tight mb-6
-          text-4xl sm:text-5xl lg:text-6xl
+          text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg
         ">
           Your clients deserve to know{' '}
           <span className="text-teal">where their goods are.</span>
@@ -215,20 +213,21 @@ function Hero() {
 
         <p className="
           text-lg text-[#94A3B8] font-body leading-relaxed mb-10
-          max-w-2xl mx-auto
+          max-w-2xl mx-auto drop-shadow-md
         ">
           ManifestHQ gives clearing agents a professional dashboard to track
           shipments from Mombasa Port to Nairobi — with automated SMS updates
           to merchants at every stage. No more status calls. No more WhatsApp chaos.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Buttons wrapper needs pointer-events-auto so they are clickable */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pointer-events-auto">
           <Link
             to="/register"
             className="
               h-12 px-8 rounded-full font-semibold font-body text-base
               bg-teal text-midnight hover:bg-teal-dark transition-colors
-              flex items-center gap-2 w-full sm:w-auto justify-center
+              flex items-center gap-2 w-full sm:w-auto justify-center shadow-lg shadow-teal/20
             "
           >
             Start free — 60 day trial
@@ -238,8 +237,8 @@ function Hero() {
             href="#calculator"
             className="
               h-12 px-8 rounded-full font-semibold font-body text-sm
-              border border-white/15 text-white hover:border-white/30
-              transition-colors flex items-center gap-2 w-full sm:w-auto justify-center
+              border border-white/15 text-white hover:bg-white/5 hover:border-white/30
+              transition-colors flex items-center gap-2 w-full sm:w-auto justify-center backdrop-blur-sm
             "
           >
             <Calculator className="w-4 h-4 text-teal" />
@@ -248,15 +247,13 @@ function Hero() {
         </div>
 
         {/* Trust strip */}
-        <div className="
-          flex items-center justify-center gap-6 mt-14 flex-wrap
-        ">
+        <div className="flex items-center justify-center gap-6 mt-14 flex-wrap pointer-events-auto">
           {[
             'No credit card required',
             'SMS sent in under 60 seconds',
             'Demurrage alerts built in',
           ].map((t, i) => (
-            <div key={t} className={`flex items-center gap-2 text-sm text-[#64748B] font-body reveal reveal-delay-${i + 1}`}>
+            <div key={t} className={`flex items-center gap-2 text-sm text-[#94A3B8] font-body reveal reveal-delay-${i + 1}`}>
               <CheckCircle2 className="w-4 h-4 text-teal shrink-0" />
               {t}
             </div>
@@ -265,9 +262,9 @@ function Hero() {
       </div>
 
       {/* Scroll cue */}
-      <div className="flex justify-center mt-16 reveal reveal-delay-4">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 reveal reveal-delay-4 pointer-events-auto">
         <a href="#how-it-works" className="text-[#64748B] hover:text-white transition-colors">
-          <ChevronDown className="w-5 h-5 animate-bounce" />
+          <ChevronDown className="w-6 h-6 animate-bounce" />
         </a>
       </div>
     </section>
